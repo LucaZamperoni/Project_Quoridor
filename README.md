@@ -1,7 +1,9 @@
 # Quoridor
 This project was developed for EDA6, a talent show proposed by eventbrite.
 
-![U081c048345e74541b82c5c685103f39fn](https://user-images.githubusercontent.com/99847899/170201090-a2c6e9c7-927b-4a41-88a3-9420f98c8cd6.jpg)
+<div align="center">
+  <img height="300em" src="https://user-images.githubusercontent.com/99847899/170375816-bcf98936-8f48-4bab-bf72-9888dd61e228.jpg"/>
+</div>
 
 ## What is the challenge about?
 For this challenge we could use any programming language that could implement websockets, I chose java because it is the only one I have learned so far :)
@@ -23,17 +25,28 @@ The main difference is that Quoridor is normally played with one pawn per player
 - Locating a wall grants 3 points.
 - If your pawn reaches the other side of the board, you earn 1000 points.
 
-## Comunication
-Having mentioned some of the rules, let's talk about the communication between bots ...
-
-### Websockets
+## Comunication: Websockets
 Definition: The WebSocket API is an advanced technology that makes it possible to open a two-way interactive communication session between the user's browser and a server. With this API, you can send messages to a server and receive event-driven responses without having to poll the server for a reply.
 
 Basically the communication works as follows:
 
-![image](https://user-images.githubusercontent.com/99847899/170199809-0c223d06-4985-4d27-9ef8-78d103a63cfb.png)
+<div align="center">
+  <img height="200em" src="https://user-images.githubusercontent.com/99847899/170379561-8febbf1d-2bc1-4d04-9b30-6f930e293466.png"/>
+</div>
+<br>
+Once connected, the bots send and receive information from the server about how the board is. For example, to indicate a move, the message sent to the server is something like this: 
+"from_row": 5,
+"from_col": 1,
+"to_row": 4,
+"to_col": 1. To locate a wall, you must specify the row, column and orientation (vertical / horizontal).
+<b>
+The move is sent to the server, the server verifies if it is valid, sends the board to the other bot and so on.
+</b>
+
+# MY BOT
 
 
 
 
- 
+
+
