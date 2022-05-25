@@ -46,7 +46,12 @@ The move is sent to the server, the server verifies if it is valid, sends the bo
 # MY BOT
 As I said, my bot was built in java, specifically in version 8.2. It has a total of 90 unit tests for the functions that contain logic, which together determine the bot's moves (I used Junit for testing). I also used some libraries for handling websockets and messages in json format, they are in the "libraries" folder.
 
+## How does it work?
+In short, my program follows 3 steps:
+1) Represent the board in a matrix.
+2) Analysis of movement and profit of each pawn (both own and enemies).
+3) Based on those analyses the bot decides whether to place a wall or to make a move.
 
-
+## Some Clarifications
 
 
