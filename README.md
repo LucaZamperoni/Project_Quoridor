@@ -6,7 +6,7 @@ This project was developed for EDA6, a talent show proposed by eventbrite.
 </div>
 
 ## What is the challenge about?
-For this challenge we could use any programming language that could implement websockets, I chose java because it is the only one I have learned so far :)
+For this challenge we could use any programming language that could implement websockets, I chose <b>java</b> because it is the only one I have learned so far :)
 
 The participants had to develop an artificial intelligence that could play a modified version of quoridor.
 The main difference is that Quoridor is normally played with one pawn per player, in this case our AI has to play with 3 pawns.
@@ -44,7 +44,7 @@ The move is sent to the server, the server verifies if it is valid, sends the bo
 </b>
 
 # MY BOT
-
+As I said, my bot was built in java, specifically in version 8.2. It has a total of 90 unit tests for the functions that contain logic, which together determine the bot's moves (I used Junit for testing). I also used some libraries for handling websockets and messages in json format, they are in the "libraries" folder.
 
 
 
