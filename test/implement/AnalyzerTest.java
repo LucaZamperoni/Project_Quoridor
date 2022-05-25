@@ -1,18 +1,30 @@
-package ai;
+package implement;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 public class AnalyzerTest {
 
+    private int row;
+    private int col;
+    private String enemyPawn;
+    private String[][] board;
+
+    @Before
+    public void init() {
+        row = 0;
+        col = 0;
+        enemyPawn = "S";
+        board = null;
+    }
+
+    // NORTH TESTS -------------------------------------------------------------
     @Test
-    public void testAnalyzeN() {
-        // Cases in which the result should be false.
-        int row = 1;
-        int col = 1;
-        String enemyPawn = "S";
-        // Case 1:
-        String[][] board = new String[][]{
+    public void testAnalyzeNIfWall() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", "-", " ", " "},
             {" ", " ", "N", " ", " "},
@@ -25,7 +37,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 2:
+    }
+
+    @Test
+    public void testAnalyzeNIfAllyPawn() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", "N", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -39,7 +56,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 3:
+    }
+
+    @Test
+    public void testAnalyzeNIfWallAndAllyPawn() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", "N", " ", " "},
             {" ", " ", "-", " ", " "},
@@ -53,8 +75,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Cases in which the result should be true.
-        // Case 1:
+    }
+
+    @Test
+    public void testAnalyzeNIfEmpty() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -68,21 +94,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 2:
-        board = new String[][]{
-            {" ", " ", " ", "|", " "},
-            {" ", " ", " ", "*", " "},
-            {" ", " ", "N", "|", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "}};
-        try {
-            Boolean expResult = true;
-            Boolean result = Analyzer.analyzeN(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Case 3: in this case the north is blocked, but the result is true because I have another method that is responsible for analyzing that specific situation.
+    }
+
+    @Test
+    public void testAnalyzeNIfBlockedButTrue() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", "S", "|", " "},
             {" ", " ", " ", "*", " "},
@@ -90,6 +107,7 @@ public class AnalyzerTest {
             {" ", "-", "*", "-", " "},
             {" ", " ", " ", " ", " "}};
         try {
+            // In this case the north is blocked, but the result is true because I have another method that is responsible for analyzing that specific situation.
             Boolean expResult = true;
             Boolean result = Analyzer.analyzeN(row, col, board, enemyPawn);
             assertEquals(expResult, result);
@@ -99,13 +117,10 @@ public class AnalyzerTest {
     }
 
     @Test
-    public void testAnalyzeJumpN() {
-        // Cases in which the result should be false.
-        int row = 2;
-        int col = 1;
-        String enemyPawn = "S";
-        // Case 1:
-        String[][] board = new String[][]{
+    public void testAnalyzeJumpNIfWall() {
+        row = 2;
+        col = 1;
+        board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", "-", " ", " "},
             {" ", " ", "S", " ", " "},
@@ -118,7 +133,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 2:
+    }
+
+    @Test
+    public void testAnalyzeJumpNIfAllyPawn() {
+        row = 2;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -132,7 +152,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 3:
+    }
+
+    @Test
+    public void testAnalyzeJumpNIfNextPositionIsNotEmpty() {
+        row = 2;
+        col = 1;
         board = new String[][]{
             {" ", " ", "N", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -146,7 +171,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Only case where it should be true.
+    }
+
+    @Test
+    public void testAnalyzeJumpNIfEmpty() {
+        row = 2;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -162,14 +192,12 @@ public class AnalyzerTest {
         }
     }
 
+    // SOUTH TESTS -------------------------------------------------------------
     @Test
-    public void testAnalyzeS() {
-        // Cases in which the result should be false.
-        int row = 1;
-        int col = 1;
-        String enemyPawn = "S";
-        // Case 1:
-        String[][] board = new String[][]{
+    public void testAnalyzeSIfWall() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", "N", " ", " "},
@@ -182,7 +210,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 2:
+    }
+
+    @Test
+    public void testAnalyzeSIfAllyPawn() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -196,7 +229,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 3:
+    }
+
+    @Test
+    public void testAnalyzeSIfWallAndAllyPawn() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -210,8 +248,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Cases in which the result should be true.
-        // Case 1:
+    }
+
+    @Test
+    public void testAnalyzeSIfEmpty() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -225,21 +267,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 2:
-        board = new String[][]{
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", "N", "|", " "},
-            {" ", " ", " ", "*", " "},
-            {" ", " ", " ", "|", " "}};
-        try {
-            Boolean expResult = true;
-            Boolean result = Analyzer.analyzeS(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Case 3: in this case the south is blocked, but the result is true because I have another method that is responsible for analyzing that specific situation.
+    }
+
+    @Test
+    public void testAnalyzeSIfBlockedButTrue() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", "|", " "},
             {" ", " ", " ", "*", " "},
@@ -247,6 +280,7 @@ public class AnalyzerTest {
             {" ", "*", " ", " ", " "},
             {" ", "|", "S", " ", " "}};
         try {
+            // In this case the south is blocked, but the result is true because I have another method that is responsible for analyzing that specific situation.
             Boolean expResult = true;
             Boolean result = Analyzer.analyzeS(row, col, board, enemyPawn);
             assertEquals(expResult, result);
@@ -256,26 +290,9 @@ public class AnalyzerTest {
     }
 
     @Test
-    public void testAnalyzeJumpS() {
-        // Cases in which the result should be false.
-        int row = 0;
-        int col = 1;
-        String enemyPawn = "S";
-        // Case 1:
-        String[][] board = new String[][]{
-            {" ", " ", "N", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", "S", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", "N", " ", " "}};
-        try {
-            Boolean expResult = false;
-            Boolean result = Analyzer.analyzeJumpS(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Case 2:
+    public void testAnalyzeJumpSIfWall() {
+        row = 0;
+        col = 1;
         board = new String[][]{
             {" ", " ", "N", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -289,7 +306,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 3:
+    }
+
+    @Test
+    public void testAnalyzeJumpSIfAllyPawn() {
+        row = 0;
+        col = 1;
         board = new String[][]{
             {" ", " ", "N", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -303,7 +325,31 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Only case where it should be true.
+    }
+
+    @Test
+    public void testAnalyzeJumpSIfNextPositionIsNotEmpty() {
+        row = 0;
+        col = 1;
+        board = new String[][]{
+            {" ", " ", "N", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", "S", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", "N", " ", " "}};
+        try {
+            Boolean expResult = false;
+            Boolean result = Analyzer.analyzeJumpS(row, col, board, enemyPawn);
+            assertEquals(expResult, result);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testAnalyzeJumpSIfEmpty() {
+        row = 0;
+        col = 1;
         board = new String[][]{
             {" ", " ", "N", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -319,14 +365,12 @@ public class AnalyzerTest {
         }
     }
 
+    // EAST TESTS --------------------------------------------------------------
     @Test
-    public void testAnalyzeE() {
-        // Cases in which the result should be false.
-        int row = 1;
-        int col = 1;
-        String enemyPawn = "S";
-        // Case 1:
-        String[][] board = new String[][]{
+    public void testAnalyzeEIfWall() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", "N", "|", " "},
@@ -339,7 +383,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 2:
+    }
+
+    @Test
+    public void testAnalyzeEIfAllyPawn() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -353,7 +402,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 3:
+    }
+
+    @Test
+    public void testAnalyzeEIfWallAndAllyPawn() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -367,8 +421,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Cases in which the result should be true.
-        // Case 1:
+    }
+
+    @Test
+    public void testAnalyzeEIfEmpty() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -382,21 +440,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 2:
-        board = new String[][]{
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", "N", " ", " "},
-            {" ", " ", "-", "*", "-"},
-            {" ", " ", " ", " ", " "}};
-        try {
-            Boolean expResult = true;
-            Boolean result = Analyzer.analyzeE(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Case 3: in this case the east is blocked, but the result is true because I have another method that is responsible for analyzing that specific situation.
+    }
+
+    @Test
+    public void testAnalyzeEIfBlockedButTrue() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -404,6 +453,7 @@ public class AnalyzerTest {
             {" ", "*", " ", " ", " "},
             {" ", "|", "S", " ", " "}};
         try {
+            // In this case the east is blocked, but the result is true because I have another method that is responsible for analyzing that specific situation.
             Boolean expResult = true;
             Boolean result = Analyzer.analyzeE(row, col, board, enemyPawn);
             assertEquals(expResult, result);
@@ -413,62 +463,17 @@ public class AnalyzerTest {
     }
 
     @Test
-    public void testAnalyzeJumpE() {
-        // Cases in which the result should be false.
-        int row = 0;
-        int col = 0;
-        String enemyPawn = "N";
-        // Case 1:
-        String[][] board = new String[][]{
-            {"S", " ", "S", " ", " "},
+    public void testAnalyzeJumpEIfWall() {
+        row = 0;
+        col = 0;
+        board = new String[][]{
+            {"N", " ", "S", "|", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "}};
         try {
             Boolean expResult = false;
-            Boolean result = Analyzer.analyzeJumpE(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Case 2:
-        board = new String[][]{
-            {"S", " ", "N", "|", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "}};
-        try {
-            Boolean expResult = false;
-            Boolean result = Analyzer.analyzeJumpE(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Case 3:
-        board = new String[][]{
-            {"S", " ", "N", " ", "S"},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "}};
-        try {
-            Boolean expResult = false;
-            Boolean result = Analyzer.analyzeJumpE(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Only case where it should be true.
-        board = new String[][]{
-            {"S", " ", "N", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "}};
-        try {
-            Boolean expResult = true;
             Boolean result = Analyzer.analyzeJumpE(row, col, board, enemyPawn);
             assertEquals(expResult, result);
         } catch (Exception e) {
@@ -477,119 +482,163 @@ public class AnalyzerTest {
     }
 
     @Test
-    public void testAnalyzeW() {
-        // Cases in which the result should be false.
-        int row = 1;
-        int col = 1;
-        String enemyPawn = "N";
-        // Case 1:
-        String[][] board = new String[][]{
+    public void testAnalyzeJumpEIfAllyPawn() {
+        row = 0;
+        col = 0;
+        board = new String[][]{
+            {"N", " ", "N", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
-            {" ", "|", "S", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "}};
         try {
             Boolean expResult = false;
-            Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
+            Boolean result = Analyzer.analyzeJumpE(row, col, board, enemyPawn);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail();
         }
-        // Case 2:
+    }
+
+    @Test
+    public void testAnalyzeJumpEIfNextPositionIsNotEmpty() {
+        row = 0;
+        col = 0;
         board = new String[][]{
+            {"N", " ", "S", " ", "N"},
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
-            {"S", " ", "S", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "}};
         try {
             Boolean expResult = false;
-            Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
+            Boolean result = Analyzer.analyzeJumpE(row, col, board, enemyPawn);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail();
         }
-        // Case 3:
+    }
+
+    @Test
+    public void testAnalyzeJumpEIfEmpty() {
+        row = 0;
+        col = 0;
         board = new String[][]{
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {"S", "|", "S", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "}};
-        try {
-            Boolean expResult = false;
-            Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Cases in which the result should be true.
-        // Case 1:
-        board = new String[][]{
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", "S", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "}};
-        try {
-            Boolean expResult = true;
-            Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Case 2:
-        board = new String[][]{
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
-            {" ", " ", "S", " ", " "},
-            {" ", " ", "-", "*", "-"},
-            {" ", " ", " ", " ", " "}};
-        try {
-            Boolean expResult = true;
-            Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail();
-        }
-        // Case 3: in this case the west is blocked, but the result is true because I have another method that is responsible for analyzing that specific situation.
-        board = new String[][]{
-            {" ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " "},
             {"N", " ", "S", " ", " "},
             {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "}};
+        try {
+            Boolean expResult = true;
+            Boolean result = Analyzer.analyzeJumpE(row, col, board, enemyPawn);
+            assertEquals(expResult, result);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    // WEST TESTS --------------------------------------------------------------
+    @Test
+    public void testAnalyzeWIfWall() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", "|", "N", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "}};
+        try {
+            Boolean expResult = false;
+            Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
+            assertEquals(expResult, result);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testAnalyzeWIfAllyPawn() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {"N", " ", "N", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "}};
+        try {
+            Boolean expResult = false;
+            Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
+            assertEquals(expResult, result);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testAnalyzeWIfWallAndAllyPawn() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {"N", "|", "N", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "}};
+        try {
+            Boolean expResult = false;
+            Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
+            assertEquals(expResult, result);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testAnalyzeWIfEmpty() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", "N", " ", " "},
+            {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "}};
         try {
             Boolean expResult = true;
             Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
             assertEquals(expResult, result);
         } catch (Exception e) {
-            fail("Test: analizeW threw an Exception.");
+            fail();
         }
     }
 
     @Test
-    public void testAnalyzeJumpW() {
-        // Cases in which the result should be false.
-        int row = 0;
-        int col = 2;
-        String enemyPawn = "S";
-        // Case 1:
-        String[][] board = new String[][]{
-            {" ", " ", "N", " ", "N"},
+    public void testAnalyzeWIfBlockedButTrue() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
+            {"S", " ", "N", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "}};
         try {
-            Boolean expResult = false;
-            Boolean result = Analyzer.analyzeJumpW(row, col, board, enemyPawn);
+            // In this case the west is blocked, but the result is true because I have another method that is responsible for analyzing that specific situation.
+            Boolean expResult = true;
+            Boolean result = Analyzer.analyzeW(row, col, board, enemyPawn);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail();
         }
-        // Case 2:
+    }
+
+    @Test
+    public void testAnalyzeJumpWIfWall() {
+        row = 0;
+        col = 2;
         board = new String[][]{
             {" ", "|", "S", " ", "N"},
             {" ", " ", " ", " ", " "},
@@ -603,7 +652,31 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case 3:
+    }
+
+    @Test
+    public void testAnalyzeJumpWIfAllyPawn() {
+        row = 0;
+        col = 2;
+        board = new String[][]{
+            {" ", " ", "N", " ", "N"},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " "}};
+        try {
+            Boolean expResult = false;
+            Boolean result = Analyzer.analyzeJumpW(row, col, board, enemyPawn);
+            assertEquals(expResult, result);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testAnalyzeJumpWIfNextPositionIsNotEmpty() {
+        row = 0;
+        col = 2;
         board = new String[][]{
             {"N", " ", "S", " ", "N"},
             {" ", " ", " ", " ", " "},
@@ -617,7 +690,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Only case where it should be true.
+    }
+
+    @Test
+    public void testAnalyzeJumpWIfEmpty() {
+        row = 0;
+        col = 2;
         board = new String[][]{
             {" ", " ", "S", " ", "N"},
             {" ", " ", " ", " ", " "},
@@ -633,12 +711,12 @@ public class AnalyzerTest {
         }
     }
 
+    // NE HORIZONTAL WALL TESTS ------------------------------------------------
     @Test
-    public void testScanNEHorWall() {
-        int row = 1;
-        int col = 1;
-        // Case in which the result should be 0.
-        String[][] board = new String[][]{
+    public void testScanNEHorWallIfNotWallOrEmpty() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", "*", " "},
             {" ", " ", "S", " ", " "},
@@ -651,7 +729,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case in which the result should be 1.
+    }
+
+    @Test
+    public void testScanNEHorWallIfWall() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", "-", "*", "-"},
@@ -665,7 +748,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case in which the result should be 2.
+    }
+
+    @Test
+    public void testScanNEHorWallIfEmpty() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -681,12 +769,12 @@ public class AnalyzerTest {
         }
     }
 
+    // NW HORIZONTAL WALL TESTS ------------------------------------------------
     @Test
-    public void testScanNWHorWall() {
-        int row = 1;
-        int col = 1;
-        // Case in which the result should be 0.
-        String[][] board = new String[][]{
+    public void testScanNWHorWallIfNotWallOrEmpty() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
             {" ", "|", " ", " ", " "},
             {" ", "*", " ", " ", " "},
             {" ", "|", "S", " ", " "},
@@ -699,7 +787,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case in which the result should be 1.
+    }
+
+    @Test
+    public void testScanNWHorWallIfWall() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {"-", "*", "-", " ", " "},
@@ -713,7 +806,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case in which the result should be 2.
+    }
+
+    @Test
+    public void testScanNWHorWallIfEmpty() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
@@ -729,12 +827,12 @@ public class AnalyzerTest {
         }
     }
 
+    // SE HORIZONTAL WALL TESTS ------------------------------------------------
     @Test
-    public void testScanSEHorWall() {
-        int row = 1;
-        int col = 1;
-        // Case in which the result should be 0.
-        String[][] board = new String[][]{
+    public void testScanSEHorWallIfNotWallOrEmpty() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", " ", "S", " ", " "},
@@ -747,7 +845,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case in which the result should be 1.
+    }
+
+    @Test
+    public void testScanSEHorWallIfWall() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", "-", "*", "-"},
@@ -761,7 +864,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case in which the result should be 2.
+    }
+
+    @Test
+    public void testScanSEHorWallIfEmpty() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", "|", " "},
             {" ", " ", " ", "*", " "},
@@ -777,12 +885,12 @@ public class AnalyzerTest {
         }
     }
 
+    // SW HORIZONTAL WALL TESTS ------------------------------------------------
     @Test
-    public void testScanSWHorWall() {
-        int row = 1;
-        int col = 1;
-        // Case in which the result should be 0.
-        String[][] board = new String[][]{
+    public void testScanSWHorWallIfNotWallOrEmpty() {
+        row = 1;
+        col = 1;
+        board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},
             {" ", "|", "S", " ", " "},
@@ -795,7 +903,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case in which the result should be 1.
+    }
+
+    @Test
+    public void testScanSWHorWallIfWall() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", "-", "*", "-"},
@@ -809,7 +922,12 @@ public class AnalyzerTest {
         } catch (Exception e) {
             fail();
         }
-        // Case in which the result should be 2.
+    }
+
+    @Test
+    public void testScanSWHorWallIfEmpty() {
+        row = 1;
+        col = 1;
         board = new String[][]{
             {" ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " "},

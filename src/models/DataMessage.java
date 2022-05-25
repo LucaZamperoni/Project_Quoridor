@@ -4,8 +4,6 @@ import java.util.List;
 import lombok.Data;
 
 // Model for all the posible responses that comes in the JSON.
-// Another function destructure the JSON.
-
 @Data
 public class DataMessage {
 

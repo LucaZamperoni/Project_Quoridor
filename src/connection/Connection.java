@@ -3,8 +3,8 @@ package connection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import entities.Pawn;
-import ai.NAI;
-import ai.SAI;
+import implement.NAI;
+import implement.SAI;
 import java.util.ArrayList;
 import java.util.List;
 import entities.Position;
@@ -14,16 +14,13 @@ import utilities.Information;
 import utilities.ShapeShifter;
 import utilities.Event;
 
-public final class Connection {
+public final class Connection implements Constant {
 
     private WebSocketClient clientEndPoint;
-    private final String root = "wss://4yyity02md.execute-api.us-east-1.amazonaws.com/ws?token=";
-    private final String tokenZampe = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibHVjYS56YW1wZXJvbml6QGdtYWlsLmNvbSJ9.3PkVXJ34XxzbiAx1Ab-GbvkFtFPextL3hBLQNZ8hcjY";
-
     private final String url;
 
     public Connection() throws URISyntaxException {
-        url = root.concat(tokenZampe);
+        url = ROOT.concat(TOKEN);
         start();
     }
 
@@ -117,12 +114,12 @@ public final class Connection {
         ArrayList[] allPawns = createPawns(pawnsBoard, "N", "S");
         List<Pawn> pawns = allPawns[0];
         List<Pawn> enemyPawns = allPawns[1];
-
-        pawns.forEach((pawn) -> NAI.analyzeQuadrant(pawn, board));
+        
+        pawns.forEach((pawn) -> NAI.analyzeMovement(pawn, board));
         pawns.forEach((pawn) -> pawn.setBenefit(NAI.calculateProfit(pawn.getRow())));
         pawns.sort((x, y) -> y.getBenefit().compareTo(x.getBenefit()));
 
-        enemyPawns.forEach((enemyPawn) -> SAI.analyzeQuadrant(enemyPawn, board));
+        enemyPawns.forEach((enemyPawn) -> SAI.analyzeMovement(enemyPawn, board));
         enemyPawns.forEach((enemyPawn) -> enemyPawn.setBenefit(SAI.calculateProfit(enemyPawn.getRow())));
         enemyPawns.sort((x, y) -> y.getBenefit().compareTo(x.getBenefit()));
 
@@ -159,11 +156,11 @@ public final class Connection {
         List<Pawn> pawns = allPawns[0];
         List<Pawn> enemyPawns = allPawns[1];
 
-        pawns.forEach((pawn) -> SAI.analyzeQuadrant(pawn, board));
+        pawns.forEach((pawn) -> SAI.analyzeMovement(pawn, board));
         pawns.forEach((pawn) -> pawn.setBenefit(SAI.calculateProfit(pawn.getRow())));
         pawns.sort((x, y) -> y.getBenefit().compareTo(x.getBenefit()));
 
-        enemyPawns.forEach((enemyPawn) -> NAI.analyzeQuadrant(enemyPawn, board));
+        enemyPawns.forEach((enemyPawn) -> NAI.analyzeMovement(enemyPawn, board));
         enemyPawns.forEach((enemyPawn) -> enemyPawn.setBenefit(NAI.calculateProfit(enemyPawn.getRow())));
         enemyPawns.sort((x, y) -> y.getBenefit().compareTo(x.getBenefit()));
 

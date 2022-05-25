@@ -5,22 +5,19 @@ import com.google.gson.GsonBuilder;
 import models.DataMessage;
 import models.Message;
 
-// this class is responsible of manipulating everything related to JSON.
+// This class is responsible of manipulating everything related to JSON.
 public class ShapeShifter {
     
-    // objectToJSON: takes an Object to convert it into a JSON-formatted String.
     public static String objectToJSON(Message obj) {
         Gson GSON = new GsonBuilder().setPrettyPrinting().create();
         return GSON.toJson(obj, Message.class);
     }
 
-    // JSONToObject takes a JSON-formatted String to convert it into an Object.
     public static Message JSONToObject(String json) {
         Gson GSON = new GsonBuilder().serializeNulls().create();
         return GSON.fromJson(json, Message.class);
     }
 
-    // acceptChallenge: build a JSON to accept any incoming requests.
     public static String acceptChallenge(String challenge_id) {
         Message msj = new Message();
         DataMessage dataMsj = new DataMessage();
@@ -30,13 +27,11 @@ public class ShapeShifter {
         return objectToJSON(msj);
     }
 
-    // gameover: build a JSON to show that the game is over.
     public static String gameover(Message req) {
         String message = objectToJSON(req);
         return message;
     }
 
-    // move: build the response messages, to respond to the socket my move.
     public static String move(Message req, int fromRow, int fromCol, int toRow, int toCol) {
         Message msj = new Message();
         DataMessage dataMsj = new DataMessage();
@@ -50,11 +45,9 @@ public class ShapeShifter {
         dataMsj.setTo_col(toCol);
 
         msj.setData(dataMsj);
-        System.out.println(objectToJSON(msj));
         return objectToJSON(msj);
     }
     
-    // wall: build the response messages, to respond to the socket my wall.
     public static String wall(Message req, int row, int col, String direction) {
         Message msj = new Message();
         DataMessage dataMsj = new DataMessage();
@@ -67,7 +60,6 @@ public class ShapeShifter {
         dataMsj.setOrientation(direction);
 
         msj.setData(dataMsj);
-        System.out.println(objectToJSON(msj));
         return objectToJSON(msj);
     }
 }

@@ -28,14 +28,12 @@ public class WebSocketClient {
         }
     }
 
-    // onOpen: enable the user session to be active.
     @OnOpen
     public void onOpen(Session userSession) {
         System.out.println("Opening websocket:");
         this.userSession = userSession;
     }
 
-    // onClose: is responsible of unlinking the app with the socket for some reason that demands it.
     @OnClose
     public void onClose(Session userSession, CloseReason reason) {
         System.out.println("Closing websocket:");

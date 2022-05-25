@@ -1,4 +1,4 @@
-package ai;
+package implement;
 
 import entities.Pawn;
 import entities.Position;
@@ -48,6 +48,7 @@ public class SAI extends Analyzer {
         }
     }
 
+    // If the enemy pawn is considered a threat, this method returns the position of the wall that will block it.
     public static Wall blockPath(Pawn enemyPawn, String[][] board) {
         int row = enemyPawn.getRow();
         int col = enemyPawn.getCol();
@@ -130,17 +131,21 @@ public class SAI extends Analyzer {
         }
         return null;
     }
-
+    
+    // This function is used as the base for deciding which way the pawn should dodge a horizontal wall.
     public static Boolean ColWallOdd(int row, int col, String[][] board) {
-        if (col + 1 <= 8) {
-            if (scanNEHorWall(row, col, board) == 1) {
-                return col % 2 != 0;
+        try {
+            if (col + 1 <= 8) {
+                if (scanNEHorWall(row, col, board) == 1) {
+                    return col % 2 != 0;
+                }
             }
-        }
-        if (col - 1 >= 0) {
-            if (scanNWHorWall(row, col, board) == 1) {
-                return (col - 1) % 2 != 0;
+            if (col - 1 >= 0) {
+                if (scanNWHorWall(row, col, board) == 1) {
+                    return (col - 1) % 2 != 0;
+                }
             }
+        } catch (Exception e) {
         }
         return null;
     }
