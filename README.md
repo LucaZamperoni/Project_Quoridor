@@ -2,7 +2,7 @@
 This project was built as a requirement to have the opportunity to be selected for the 2022 Eventbrite Development Academy (6th edition).
 
 <div align="center">
-  <img height="300em" src="https://user-images.githubusercontent.com/99847899/170375816-bcf98936-8f48-4bab-bf72-9888dd61e228.jpg"/>
+  <img align="auto" src="https://user-images.githubusercontent.com/99847899/170375816-bcf98936-8f48-4bab-bf72-9888dd61e228.jpg"/>
 </div>
 
 ## What is the challenge about?
@@ -32,7 +32,7 @@ Definition: The WebSocket API is an advanced technology that makes it possible t
 Basically the communication works as follows:
 
 <div align="center">
-  <img height="200em" src="https://user-images.githubusercontent.com/99847899/170379561-8febbf1d-2bc1-4d04-9b30-6f930e293466.png"/>
+  <img align="auto" src="https://user-images.githubusercontent.com/99847899/170379561-8febbf1d-2bc1-4d04-9b30-6f930e293466.png"/>
 </div>
 <br>
 Once connected, the bots send and receive information from the server about how the board is. For example, to indicate a move, the message sent to the server is something like this: 
