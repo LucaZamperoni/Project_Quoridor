@@ -1,18 +1,19 @@
 # Quoridor
-This project was developed for EDA6, a talent show proposed by eventbrite.
+This project was built as a requirement to have the opportunity to be selected for the 2022 Eventbrite Development Academy (6th edition).
 
 <div align="center">
   <img height="300em" src="https://user-images.githubusercontent.com/99847899/170375816-bcf98936-8f48-4bab-bf72-9888dd61e228.jpg"/>
 </div>
 
 ## What is the challenge about?
-For this challenge we could use any programming language that could implement websockets, I chose <b>java</b> because it is the only one I have learned so far :)
+The participants had to develop a bot that could play a modified version of quoridor.
+The main difference is that the official version of Quoridor must be played with one pawn per player, but in this case our bot has to play with 3 pawns.
 
-The participants had to develop an artificial intelligence that could play a modified version of quoridor.
-The main difference is that Quoridor is normally played with one pawn per player, in this case our AI has to play with 3 pawns.
+For this challenge we could use any programming language that could implement websockets. I chose <b>java</b> because it is the only one I have learned so far :)
+
 
 ### Here are some Rules:
-- Objective: each player must take their pawns to the other end of the board to earn as many points as possible. At the same time, each player has to prevent the advance of the other.
+- Objective: each player must take their pawns to the other end of the board to earn as many points as possible. At the same time, each player has to prevent the advance of the oponent pawns.
 
 - Each player has 10 walls that they can use to hinder the other player's progress.
 
@@ -22,7 +23,7 @@ The main difference is that Quoridor is normally played with one pawn per player
 
 ### How to get points?
 - Add the power of 2 to the distance from the square of origin.
-- Locating a wall grants 3 points.
+- Placing a wall grants 3 points.
 - If your pawn reaches the other side of the board, you earn 1000 points.
 
 ## Comunication: Websockets
@@ -40,17 +41,17 @@ Once connected, the bots send and receive information from the server about how 
 "to_row": 4,
 "to_col": 1. To locate a wall, you must specify the row, column and orientation (vertical / horizontal).
 <b>
-The move is sent to the server, the server verifies if it is valid, sends the board to the other bot and so on.
+The move is sent to the server. The server verifies if it is valid and, if so, sends the board to the other bot and so on.
 </b>
 
 # MY BOT
-As I said, my bot was built in java, specifically in version 8.2. It has a total of 90 unit tests for the functions that contain logic, which together determine the bot's moves (I used Junit for testing). I also used some libraries for handling websockets and messages in json format, they are in the "libraries" folder.
+As I said, my bot was built in java, version 8.2. It has a total of 90 unit tests for the functions that contain logic, which together determine the bot's moves (I used Junit for testing). I also used some libraries for handling websockets and messages in json format located in the "libraries" folder.
 
 ## How does it work?
-In short, my program follows 3 steps:
-1) Represent the board in a matrix.
-2) Analysis of movement and profit of each pawn (both own and enemies).
-3) Based on those analyses the bot decides whether to place a wall or to make a move.
+In short, my code follows 3 steps:
+1) Represents the board as a matrix.
+2) Analyses the movement and profit of each pawn (both: own and enemies).
+3) Based on those analysis, the bot decides whether to place a wall or to make a move.
 
 ## Some Clarifications
 
