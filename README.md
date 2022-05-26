@@ -45,7 +45,7 @@ The move is sent to the server. The server verifies if it is valid and, if so, s
 </b>
 
 # MY BOT
-As I said, my bot was built in java, version 8.2. It has a total of 90 unit tests for the functions that contain logic, which together determine the bot's moves (I used Junit for testing). I also used some libraries for handling websockets and messages in json format located in the "libraries" folder.
+As I said, my bot was built in java, version 8.2. It has a total of 90 unit tests for the functions that contain logic, which together determine the bot's moves (I used JUnit for testing). I also used some libraries for handling websockets and messages in json format located in the "libraries" folder.
 
 ## How does it work?
 In short, my code follows 3 steps:
