@@ -55,4 +55,8 @@ In short, my code follows 3 steps:
 
 ## Some Clarifications
 
+My bot's moves are simple: move forward, move sideways, or place a horizontal wall. With those plays I reached my main objective, which was to be among the first places in any tournament. When I achieved that goal, I decided to expend all the remaining time to the quality of the code and its documentation (for example rebuilding it using TDD, improving the performance of the functions and considerably reducing many lines of code) instead of insisting on the logic that would have been necessary to achieve higher scores in the future.
 
+That's why the latest version of my bot doesn't place vertical walls or move backwards. If one of my pawns gets cornered, the code decides to continue playing with another pawn until the previous one is free 😉.
+
+## And that's all, thanks for reading!! 
